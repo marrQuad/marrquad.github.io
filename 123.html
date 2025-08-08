@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Для моей радости — плавный слайдер и партиклы</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pause-ms:3000;--move-ms:2000}
+body{margin:0;background:#0b0f19;font-family:'Raleway',sans-serif;color:#fff;overflow:hidden}
+.circle-container{position:absolute;left:50%;transform:translateX(-50%);animation:rotate 40s linear infinite;z-index:2}
+.circle-container span{position:absolute;font-size:4.5rem;opacity:0.3;transform-origin:0 220px;filter:drop-shadow(0 0 6px rgba(255,105,180,0.08))}
+@keyframes rotate{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+.bottom-circle{bottom:10%}.top-circle{top:10%}
+.left-circle{left:20%;top:50%;transform:translate(-50%,-50%)}.right-circle{right:20%;top:50%;transform:translate(50%,-50%)}
+.top-stack{position:fixed;top:40px;left:0;right:0;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;z-index:12;pointer-events:none;padding:6px;box-sizing:border-box}
+.center-text{width:100%;max-width:none;padding:0 5vw;box-sizing:border-box;text-align:center;color:#fff}
+.center-text h1{font-size:2.6rem;color:#ff99cc;text-shadow:0 0 10px #ff99cc,0 0 20px #ff4da6;margin:0}
+.center-text p{font-size:1.15rem;margin:6px 0;color:#fff;line-height:1.35;text-shadow:0 0 6px rgba(255,255,255,0.12),0 0 18px rgba(255,255,255,0.06)}
+.center-text p.glow-white{text-shadow:0 0 12px rgba(255,255,255,0.45),0 0 28px rgba(255,255,255,0.18)}
+.apology-text{font-family:'Great Vibes',cursive;font-size:2.2rem;color:#e6f7ff;text-align:center;line-height:1.1;pointer-events:none;text-shadow:0 0 12px rgba(180,235,255,0.9),0 0 28px rgba(120,200,255,0.2);margin-top:6px}
+.apology-sub{font-family:'Raleway',sans-serif;font-size:1rem;color:#d7f0ff;opacity:0.95;text-shadow:0 0 6px rgba(180,235,255,0.15);width:100%;padding:0 5vw;margin-top:4px;text-align:center}
+.apology-decor{position:absolute;left:50%;top:100%;transform:translate(-50%,-60%);pointer-events:none;opacity:0.06;z-index:10}
+.photo-strip{position:fixed;left:0;bottom:0;width:100%;height:220px;overflow:hidden;z-index:6;background:transparent}
+.photo-strip-inner{display:flex;height:100%;will-change:transform;align-items:center}
+.photo-strip img{height:280px;width:auto;margin:0 10px;border-radius:10px;object-fit:cover;flex-shrink:0;user-select:none}
+canvas.particles{position:fixed;top:0;left:0;pointer-events:none;z-index:8}
+.kiss-wrap{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(220px + 2cm);z-index:15;display:flex;justify-content:center}
+.kiss-btn{position:relative;background:linear-gradient(135deg,#ff7fb3,#ff4da6);border:none;padding:12px 18px;border-radius:999px;color:white;font-weight:700;cursor:pointer;box-shadow:0 6px 28px rgba(255,77,166,0.18);transform:translateZ(0);transition:transform .18s ease}
+.kiss-btn:active{transform:scale(.98)}
+.kiss-pop{position:fixed;font-size:28px;pointer-events:none;z-index:20;transform-origin:center center;will-change:transform,opacity}
+@keyframes kissGrowFade{0%{transform:translateY(0) scale(1);opacity:1}60%{transform:translateY(-80px) scale(2.4);opacity:0.95}100%{transform:translateY(-160px) scale(3.6);opacity:0}}
+.floating-hearts{position:absolute;inset:0;pointer-events:none;z-index:11}
+.floating-hearts .fheart{position:absolute;font-size:2rem;opacity:0.12;color:#ff9cc4;animation:floatUp 6s linear infinite}
+.fheart.s1{left:45%;top:10%;animation-duration:6.6s}
+.fheart.s2{left:60%;top:20%;animation-duration:7.2s;opacity:0.09}
+.fheart.s3{left:35%;top:18%;animation-duration:5.8s}
+@keyframes floatUp{0%{transform:translateY(0) scale(.9);opacity:.1}50%{opacity:.18}100%{transform:translateY(-80px) scale(1.05);opacity:0}}
+@media(max-width:980px){.top-stack{top:18px;padding:8px 4vw}.center-text h1{font-size:1.9rem}.center-text p{font-size:1.05rem}.photo-strip img{height:180px}.photo-strip{height:140px}.kiss-wrap{bottom:calc(140px + 1.2cm)}.apology-text{font-size:1.6rem}.circle-container span{font-size:3.2rem}}
+@media(max-width:520px){.top-stack{top:12px;padding:6px 3vw}.center-text h1{font-size:1.6rem}.center-text p{font-size:1rem}.photo-strip img{height:140px}.photo-strip{height:120px}.kiss-wrap{bottom:calc(120px + 1cm)}.apology-text{font-size:1.3rem}.circle-container span{font-size:2.6rem}}
+</style>
+</head>
+<body>
+<div class="circle-container right-circle"><span style="transform: rotate(0deg)">❤️</span><span style="transform: rotate(30deg)">💋</span><span style="transform: rotate(60deg)">🌹</span><span style="transform: rotate(90deg)">💕</span><span style="transform: rotate(120deg)">💞</span><span style="transform: rotate(150deg)">💖</span><span style="transform: rotate(180deg)">💓</span><span style="transform: rotate(210deg)">💘</span><span style="transform: rotate(240deg)">🤍</span><span style="transform: rotate(270deg)">🖤</span><span style="transform: rotate(300deg)">💗</span><span style="transform: rotate(330deg)">🌹</span></div>
+<div class="circle-container left-circle"><span style="transform: rotate(0deg)">🌹</span><span style="transform: rotate(30deg)">💋</span><span style="transform: rotate(60deg)">❤️</span><span style="transform: rotate(90deg)">💓</span><span style="transform: rotate(120deg)">💗</span><span style="transform: rotate(150deg)">💕</span><span style="transform: rotate(180deg)">💘</span><span style="transform: rotate(210deg)">💞</span><span style="transform: rotate(240deg)">💖</span><span style="transform: rotate(270deg)">🖤</span><span style="transform: rotate(300deg)">🤍</span><span style="transform: rotate(330deg)">🌹</span></div>
+<div class="top-stack">
+  <div class="center-text">
+    <h1>Катюхаа, я люблююю тебя</h1>
+    <p class="glow-white">Ты — моё вдохновение, моя мечта, моё счастье.</p>
+    <p class="glow-white">Радость моя, ты — самый дорогой человек в моей жизни.</p>
+    <p class="glow-white">Я люблю тебя больше, чем можно выразить словами.</p>
+    <p class="glow-white">С каждым днём моя любовь к тебе становится сильнее.</p>
+    <p class="glow-white">Ты — свет в моём сердце, радость моя.</p>
+  </div>
+  <svg class="apology-decor" width="260" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+    <defs>
+      <linearGradient id="g1" x1="0" x2="1">
+        <stop offset="0" stop-color="#bfe6ff" stop-opacity="1"/>
+        <stop offset="1" stop-color="#79d0ff" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <path d="M12 21s-7-4.9-9-8.2C1.1 8.6 6.1 4 12 7c5.9-3 10.9 1.6 9 5.8C19 16.1 12 21 12 21z" fill="url(#g1)" />
+  </svg>
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center">
+    <div class="apology-text">Прости меня, пожалуйста — за огорчения и слова, что могли ранить. Я ценю тебя, твои чувства и хочу, чтобы ты знала: мне важно, чтобы тебе было хорошо.</div>
+    <div class="apology-sub">Пожалуйста, не унывай и не сердись на меня — я учусь быть лучше ради нас.</div>
+  </div>
+</div>
+<div class="floating-hearts" aria-hidden="true"><div class="fheart s1">💗</div><div class="fheart s2">💞</div><div class="fheart s3">🌹</div></div>
+<div class="photo-strip"><div class="photo-strip-inner" id="photoStripInner"><img src="photo1.jpg" alt="Фото 1" /><img src="photo2.jpg" alt="Фото 2" /><img src="photo3.jpg" alt="Фото 3" /><img src="photo4.jpg" alt="Фото 4" /><img src="photo5.jpg" alt="Фото 5" /><img src="photo6.jpg" alt="Фото 6" /><img src="photo7.jpg" alt="Фото 7" /><img src="photo8.jpg" alt="Фото 8" /></div></div>
+<div class="kiss-wrap"><button class="kiss-btn" id="kissBtn">KISS</button></div>
+<canvas class="particles"></canvas>
+<script>
+const canvas=document.querySelector('.particles');const ctx=canvas.getContext('2d');function fitCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}fitCanvas();const heartImg=new Image();heartImg.src='heart.png';const particles=[];function createParticle(){const size=Math.random()*36+12;particles.push({x:Math.random()*canvas.width,y:canvas.height+size,size,px:(Math.random()-0.5)*1.2,py:Math.random()*1.1+0.6,rot:Math.random()*Math.PI*2,rs:(Math.random()-0.5)*0.08,alpha:0.22+Math.random()*0.3})}function drawParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach((p,i)=>{ctx.save();ctx.globalAlpha=p.alpha;ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.drawImage(heartImg,-p.size/2,-p.size/2,p.size,p.size);ctx.restore();p.x+=p.px;p.y-=p.py;p.rot+=p.rs;if(p.y<-80||p.x<-200||p.x>canvas.width+200)particles.splice(i,1)})}function loopParticles(){if(heartImg.complete){drawParticles()}requestAnimationFrame(loopParticles)}setInterval(createParticle,120);loopParticles();window.addEventListener('resize',fitCanvas);
+(function(){const rootInner=document.getElementById('photoStripInner');if(!rootInner)return;const imgs=Array.from(rootInner.querySelectorAll('img'));let loadedCount=0;imgs.forEach(img=>{if(img.complete)loadedCount++;else img.addEventListener('load',()=>{loadedCount++})});const waitFor=()=>new Promise(res=>{const t0=Date.now();(function check(){if(loadedCount>=imgs.length||Date.now()-t0>1000)return res();requestAnimationFrame(check)})()});waitFor().then(initSlider);function initSlider(){rootInner.innerHTML=rootInner.innerHTML+rootInner.innerHTML;let pos=0;let originalWidth=0;let singleStep=0;const pauseMs=3000;const moveMs=2000;function recalc(){originalWidth=rootInner.scrollWidth/2;const firstImg=rootInner.querySelector('img');if(firstImg){const s=getComputedStyle(firstImg);singleStep=firstImg.offsetWidth+parseFloat(s.marginLeft)+parseFloat(s.marginRight)}else singleStep=0;pos=((pos%originalWidth)+originalWidth)%originalWidth;applyTransform()}function applyTransform(){rootInner.style.transform=`translateX(${pos}px)`}function ease(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}async function animateMove(startPos,duration){return new Promise(res=>{const t0=performance.now();function frame(now){const elapsed=now-t0;const p=Math.min(elapsed/duration,1);const eased=ease(p);pos=startPos+(-singleStep)*eased;if(pos<=-originalWidth)pos+=originalWidth;applyTransform();if(p<1)requestAnimationFrame(frame);else res()}requestAnimationFrame(frame)})}let running=true;async function loop(){recalc();await new Promise(r=>setTimeout(r,pauseMs));while(running){const startPos=pos;if(singleStep===0)recalc();await animateMove(startPos,moveMs);pos=startPos-singleStep;if(pos<=-originalWidth)pos+=originalWidth;applyTransform();await new Promise(r=>setTimeout(r,pauseMs))}}recalc();loop();let resizeTO;window.addEventListener('resize',()=>{clearTimeout(resizeTO);resizeTO=setTimeout(()=>{recalc()},120)})}})();(function(){const btn=document.getElementById('kissBtn');if(!btn)return;btn.addEventListener('click',()=>{btn.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:220});const rect=btn.getBoundingClientRect();const centerX=rect.left+rect.width/2;const centerY=rect.top+rect.height/2;for(let i=0;i<6;i++){createKiss(centerX,centerY,i*80+Math.random()*200)}});function createKiss(x,y,delay){setTimeout(()=>{const el=document.createElement('div');el.className='kiss-pop';el.textContent='💋';document.body.appendChild(el);el.style.left=(x-18)+'px';el.style.top=(y-18)+'px';const rot=(Math.random()-0.5)*30;el.style.transform=`translateY(0) scale(1) rotate(${rot}deg)`;el.animate([{transform:`translateY(0px) scale(1) rotate(${rot}deg)`,opacity:1},{transform:`translateY(-80px) scale(2.2) rotate(${rot+10}deg)`,opacity:0.95},{transform:`translateY(-160px) scale(3.4) rotate(${rot+25}deg)`,opacity:0}],{duration:1000+Math.random()*400,easing:'cubic-bezier(.2,.9,.2,1)'}).onfinish=()=>el.remove()},delay)}})();
+</script>
+</body>
+</html>
